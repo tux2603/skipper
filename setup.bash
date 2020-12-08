@@ -50,7 +50,7 @@ sing() {
 
         deactivate)
             env="base"
-            oldEnv="$(__sing_get_env_name)"
+            oldEnv="\$(__sing_get_env_name)"
             export PATH=\`echo \$PATH | sed -e "s:\$(__sing_get_env_path):$singPath/envs/\$env/bin:g"\`
             export SING_ENV=\$env
             hash -r
