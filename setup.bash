@@ -50,15 +50,16 @@ sing() {
 
         deactivate)
             env="base"
+            oldEnv="$(__sing_get_env_name)"
             export PATH=\`echo \$PATH | sed -e "s:\$(__sing_get_env_path):$singPath/envs/\$env/bin:g"\`
             export SING_ENV=\$env
             hash -r
-            echo "Deactivated environment \$env, returned to base"
+            echo "Deactivated environment \$oldEnv, returned to base"
         ;;
 
         list)
             if [ "\$2" = 'containers' ]; then 
-                ls "$singPath/\$(__sing_get_env_name)/containers"
+                ls "$singPath/envs/\$(__sing_get_env_name)/containers"
             elif [ "\$2" = 'commands' ]; then
                 grep -Po '^[^/]*' "$singPath/envs/\$(__sing_get_env_name)/commands" | sort -u | tr '\\n' ' '
                 echo
@@ -118,7 +119,7 @@ sing() {
             echo "list containers - lists all containers that have been imported into the current environment"
             echo "register [container] [command] - sets [command] to be executed on [container] in the current environment"
         ;;
-        
+
         *)
             echo "Did not recognize command \$command"
         ;;
