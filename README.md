@@ -1,4 +1,4 @@
-# sing
+# skipper
 
 Tool for organizing singularity packages into working environments and integrating them into the shell.
 
