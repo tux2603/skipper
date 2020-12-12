@@ -1,0 +1,4 @@
+environment="$SKIPPER_ENV"
+cmd=`echo $0 | grep -o '[^/]*$'`
+container=`grep -Po "^$cmd/\\K.*\$" $SKIPPER_BASE/envs/$environment/commands | tail -n1`
+singularity exec "$SKIPPER_BASE/envs/$environment/containers/$container" $cmd $@
